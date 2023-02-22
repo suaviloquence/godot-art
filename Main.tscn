@@ -1,24 +1,27 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://image.jpg" type="Texture" id=3]
 [ext_resource path="res://addons/godot-openxr/scenes/first_person_controller_vr.tscn" type="PackedScene" id=4]
-[ext_resource path="res://sea-nmap.jpg" type="Texture" id=5]
-
-[sub_resource type="SpatialMaterial" id=1]
-flags_transparent = true
-albedo_color = Color( 0.12549, 0.0352941, 0.305882, 0.792157 )
-roughness = 0.04
-normal_enabled = true
-normal_scale = 0.12
-normal_texture = ExtResource( 5 )
+[ext_resource path="res://sea.material" type="Material" id=5]
 
 [sub_resource type="CubeMesh" id=2]
-material = SubResource( 1 )
-size = Vector3( 20, 1, 20 )
+material = ExtResource( 5 )
+size = Vector3( 20, 0.001, 20 )
 
 [sub_resource type="Environment" id=3]
+background_mode = 1
+background_energy = 0.0
+ambient_light_color = Color( 0.0980392, 0, 0.254902, 1 )
+ambient_light_energy = 0.0
+ambient_light_sky_contribution = 0.0
+glow_enabled = true
+glow_intensity = 1.0
+glow_strength = 1.25
+glow_high_quality = true
+adjustment_brightness = 0.85
+adjustment_saturation = 0.85
 
 [node name="Spatial" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1268, 0 )
@@ -26,30 +29,31 @@ script = ExtResource( 1 )
 texture = ExtResource( 3 )
 
 [node name="FPController" parent="." instance=ExtResource( 4 )]
+auto_initialise = false
 
 [node name="ARVRCamera" parent="FPController" index="1"]
 far = 1000.0
 
 [node name="Left" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 0 )
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -6, 2, 0 )
 axis = 0
 texture = ExtResource( 2 )
 
 [node name="Right" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 0 )
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6, 2, 0 )
 axis = 0
 texture = ExtResource( 2 )
 
 [node name="Into" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -4 )
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, -6 )
 texture = ExtResource( 2 )
 
 [node name="Out" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 4 )
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 6 )
 texture = ExtResource( 2 )
 
 [node name="Up" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 8, 0 )
 axis = 1
 texture = ExtResource( 2 )
 
@@ -78,9 +82,22 @@ transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 10, 0, 
 mesh = SubResource( 2 )
 
 [node name="SpotLight-Z" type="SpotLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.572, -7.88346 )
+light_color = Color( 1, 0.733333, 0.317647, 1 )
+light_energy = 20.0
+spot_range = 88.924
+spot_angle = 87.35
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
+
+[node name="CameraContainer" type="Spatial" parent="."]
+
+[node name="Camera" type="Camera" parent="CameraContainer"]
+current = true
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0 )
+omni_range = 26.39
 
 [editable path="FPController"]
