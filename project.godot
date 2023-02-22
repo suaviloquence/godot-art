@@ -1,0 +1,41 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "ARVROrigin",
+"class": "FPController",
+"language": "GDScript",
+"path": "res://addons/godot-openxr/scenes/first_person_controller_vr.gd"
+} ]
+_global_script_class_icons={
+"FPController": ""
+}
+
+[application]
+
+config/name="godot-art"
+run/main_scene="res://Main.tscn"
+config/icon="res://icon.png"
+
+[gdnative]
+
+singletons=[ "res://addons/godot-openxr/config/godot_openxr.gdnlib" ]
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
