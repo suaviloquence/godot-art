@@ -6,10 +6,6 @@
 [ext_resource path="res://addons/godot-openxr/scenes/first_person_controller_vr.tscn" type="PackedScene" id=4]
 [ext_resource path="res://sea.material" type="Material" id=5]
 
-[sub_resource type="CubeMesh" id=2]
-material = ExtResource( 5 )
-size = Vector3( 20, 0.001, 20 )
-
 [sub_resource type="Environment" id=3]
 background_mode = 1
 background_energy = 0.0
@@ -22,6 +18,11 @@ glow_strength = 1.25
 glow_high_quality = true
 adjustment_brightness = 0.85
 adjustment_saturation = 0.85
+
+[sub_resource type="SphereMesh" id=4]
+material = ExtResource( 5 )
+radius = 10.0
+height = 20.0
 
 [node name="Spatial" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1268, 0 )
@@ -46,6 +47,7 @@ texture = ExtResource( 2 )
 
 [node name="Into" type="Sprite3D" parent="."]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, -6 )
+pixel_size = 0.0406
 texture = ExtResource( 2 )
 
 [node name="Out" type="Sprite3D" parent="."]
@@ -56,30 +58,6 @@ texture = ExtResource( 2 )
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 8, 0 )
 axis = 1
 texture = ExtResource( 2 )
-
-[node name="SeaFloor" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0 )
-mesh = SubResource( 2 )
-
-[node name="SeaRoof" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0 )
-mesh = SubResource( 2 )
-
-[node name="Sea-Z" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -10 )
-mesh = SubResource( 2 )
-
-[node name="Sea+Z" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 10 )
-mesh = SubResource( 2 )
-
-[node name="Sea-X" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -10, 0, 0 )
-mesh = SubResource( 2 )
-
-[node name="Sea+X" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 10, 0, 0 )
-mesh = SubResource( 2 )
 
 [node name="SpotLight-Z" type="SpotLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.572, -7.88346 )
@@ -99,5 +77,8 @@ current = true
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0 )
 omni_range = 26.39
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 4 )
 
 [editable path="FPController"]

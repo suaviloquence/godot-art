@@ -23,7 +23,7 @@ func _ready():
 		child.translation.y = height / 2
 		child.texture = texture
 		
-	$Up.translation.y = height 
+	$Up.translation.y = height + gaps
 	$"SpotLight-Z".translation.y = height / 2
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
